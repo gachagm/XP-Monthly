@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newsletter Signup</title>
+    <title>XP Monthly Signup</title>
     <style>
         * {
             margin: 0;
@@ -85,20 +85,6 @@
             transform: translateY(0);
         }
 
-        .success-message {
-            display: none;
-            color: #28a745;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        .error-message {
-            display: none;
-            color: #dc3545;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
         @media (max-width: 500px) {
             .container {
                 padding: 30px 20px;
@@ -120,7 +106,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>✉️ Newsletter</h1>
+        <h1>✉️ XP Monthly</h1>
         <p class="subtitle">Subscribe to get the latest updates delivered straight to your inbox!</p>
         
         <form id="newsletterForm">
@@ -134,13 +120,6 @@
                 <button type="submit">Subscribe</button>
             </div>
         </form>
-
-        <div id="successMessage" class="success-message">
-            ✓ Thank you for subscribing!
-        </div>
-        <div id="errorMessage" class="error-message">
-            ✗ Please enter a valid email address
-        </div>
     </div>
 
     <script>
@@ -149,34 +128,20 @@
 
             const emailInput = document.getElementById('email');
             const email = emailInput.value.trim();
-            const successMessage = document.getElementById('successMessage');
-            const errorMessage = document.getElementById('errorMessage');
-
-            // Reset messages
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
 
             // Validate email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                errorMessage.style.display = 'block';
+                alert('Please enter a valid email address');
                 return;
             }
 
-            // Create mailto link and open it
-            const mailtoLink = `mailto:zekkoriamekasa@gmail.com?subject=New Newsletter Subscription&body=Email: ${encodeURIComponent(email)}`;
+            // Create mailto link with the user's email in the message body
+            const subject = 'New Newsletter Subscription';
+            const body = `Email Address: ${email}`;
+            const mailtoLink = `mailto:zekkoriamekasa@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
             window.location.href = mailtoLink;
-
-            // Show success message
-            successMessage.style.display = 'block';
-
-            // Clear input
-            emailInput.value = '';
-
-            // Hide success message after 3 seconds
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 3000);
         });
     </script>
 </body>
